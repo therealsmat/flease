@@ -1,0 +1,20 @@
+{
+  "name": "lively",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "lively": "./bin/index.js"
+  },
+  "dependencies": {
+    "boxen": "^4.0.0",
+    "chalk": "^2.4.2",
+    "yargs": "^13.2.4"
+  }
+}
