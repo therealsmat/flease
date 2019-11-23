@@ -1,5 +1,5 @@
 {
-  "name": "lively",
+  "name": "flease",
   "version": "0.3.0",
   "description": "",
   "main": "bin/index.js",
@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "bin": {
-    "lively": "./bin/index.js"
+    "flease": "./bin/index.js"
   },
   "dependencies": {
     "boxen": "^4.0.0",
