@@ -22,12 +22,14 @@ exports.checkBaseDirectory = async (baseDir) => {
     return response;
 }
 
-exports.createNewFile = async (fileName, dir = '', ext = 'js') => {
+exports.createNewFile = async (fileName, dir = '', content = '', ext = 'js') => {
     let success = false;
     let filePath = path.join(exports.cwd, dir, `${fileName}.${ext}`);
-    await makeNewFile(filePath, 'Hello')
+
+    await makeNewFile(filePath, content, 'ascii')
         .then(res => success = filePath)
         .catch(err => success = false );
+
     return success;
 }
 
@@ -36,15 +38,35 @@ exports.pathExists = async (pathName) => {
     await stat(path.join(exports.cwd, pathName))
         .then(res => success = true)
         .catch(err => { 
-            console.log(`${err}`);
+            if (err.code == 'ENOENT') success = false;
         });
     return success;
 }
 
 // Wrapper around creation methods
-exports.generateFile = async (name, dir) => {
+exports.generateFile = async (name, dir, content) => {
     const _this = exports;
     if (!_this.cwd) _this.setWorkingDirectory();
-    let base = await _this.checkBaseDirectory(dir);
-    let result = await _this.createNewFile(name, dir);
+    await _this.checkBaseDirectory(dir);
+    await _this.createNewFile(name, dir, content);
+}
+
+exports.fetchStub = async (category) => {
+    let stub;
+    await fs.readJson(`${__dirname}/../stubs/Stub.json`).then(res => {
+        stub = res[category];
+    });
+    return stub ? stub.join('') : '';
+}
+
+exports.generateStub = async(model, category) => {
+    let stub = await exports.fetchStub(category);
+    let camelCase = exports.toCamelCase(model);
+    stub = stub.replace(/#{name}/g, camelCase);
+    stub = stub.replace(/#{model}/g, model);
+    return stub;
+}
+
+exports.toCamelCase = (str) => {
+    return str.charAt(0).toLowerCase() + str.substring(1);
 }

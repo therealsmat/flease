@@ -1,9 +1,4 @@
-const fs = require('fs-extra');
 const factory = require('../src/Factory');
-const os = require('os');
-const path = require('path');
-const {promisify} = require('util');
-
 
 describe('Controller', () => {
     beforeEach(async () => {
@@ -31,4 +26,9 @@ describe('Controller', () => {
         let modelParent = modelPieces.splice(0, (modelPieces.length - 1)).join('/');
         expect(modelParent).toBe(`${TMP_DIR}/models`);
     });
+
+    it('generates appropriate stub for various categories', async () => {
+        let stub = await factory.generateStub('User', 'models');
+        expect(stub).toMatch(/userSchema/);
+    })
 });

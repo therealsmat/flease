@@ -11,7 +11,7 @@ global.runCommand = (command, cmdFile) => {
     return new Promise(resolve => {
         const parser = yargs.command(cmdFile);
         parser.parse(`${command}`, (err, argv, output) => {
-            resolve(argv);
+            resolve(output);
         });
     });
 }
