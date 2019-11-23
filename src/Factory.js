@@ -40,3 +40,11 @@ exports.pathExists = async (pathName) => {
         });
     return success;
 }
+
+// Wrapper around creation methods
+exports.generateFile = async (name, dir) => {
+    const _this = exports;
+    if (!_this.cwd) _this.setWorkingDirectory();
+    let base = await _this.checkBaseDirectory(dir);
+    let result = await _this.createNewFile(name, dir);
+}

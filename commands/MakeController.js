@@ -8,8 +8,6 @@ exports.builder = {};
 const baseDir = `/controllers`;
 
 exports.handler = async (argv) => {
-    if (!cmdFactory.cwd) cmdFactory.setWorkingDirectory();
-
-    let base = await cmdFactory.checkBaseDirectory(baseDir);
-    let result = await cmdFactory.createNewFile(argv.name, baseDir);
+    //Generate the requested file
+    cmdFactory.generateFile(argv.name, baseDir);
 }
