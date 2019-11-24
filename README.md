@@ -1,4 +1,4 @@
-# Flease
+# Flease :rocket::rocket:
 Flease is a convenient tool to speedup generating boilerplate files during development. 
 
 By default, it is designed to generate express files like `models` and `controllers` and also imports mongoose. However, it is not limited to Node js. 
@@ -66,4 +66,13 @@ You can edit or add new lines in each section. As long as it is a valid json str
 ## Testing
 This project uses Jest for automated testing. Run `npm test`
 
+## Todo's
+Some upcoming features include;
+  - Generate any file from config
+  - Extensive tests
+  - Saving config file as preset globally
+
 ## Contributing
+Please feel free to fork this package and contribute by submitting a pull request to enhance the functionalities.
+
+Dont forget to leave a :star: on this repo :wink:
