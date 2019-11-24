@@ -7,6 +7,21 @@ const path = require('path');
 
 exports.cwd;
 
+exports.configPublishPath = `${process.cwd()}/flease.json`;
+
+exports.getStubFromFile = async (category) => {
+    let stub;
+    await fs.readJson(exports.configPublishPath).then(res => {
+        let data = res[category];
+        stub = data ? data.join('') : '';
+    }).catch(async err => {
+        if (err.code == 'ENOENT') {
+            stub = await exports.fetchStub(category)
+        }
+    });
+    return stub;
+}
+
 exports.setWorkingDirectory = (cwd) => {
     exports.cwd = cwd || process.cwd();
 }
@@ -60,7 +75,7 @@ exports.fetchStub = async (category) => {
 }
 
 exports.generateStub = async(model, category) => {
-    let stub = await exports.fetchStub(category);
+    let stub = await exports.getStubFromFile(category);
     let camelCase = exports.toCamelCase(model);
     stub = stub.replace(/#{name}/g, camelCase);
     stub = stub.replace(/#{model}/g, model);
