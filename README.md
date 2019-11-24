@@ -78,3 +78,7 @@ Some upcoming features include;
 Please feel free to fork this package and contribute by submitting a pull request to enhance the functionalities.
 
 Dont forget to leave a :star: on this repo :wink:
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
