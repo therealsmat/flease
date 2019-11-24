@@ -21,7 +21,7 @@ exports.handler = async (argv) => {
 }
 
 exports.generateStub = async(model, category) => {
-    let stub = await cmdFactory.fetchStub(category);
+    let stub = await cmdFactory.getStubFromFile(category);
     if (model) {
         stub = stub.replace(/#{model}/g, model);
     }

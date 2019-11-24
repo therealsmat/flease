@@ -13,4 +13,5 @@ exports.handler = async (argv) => {
     let content = await cmdFactory.generateStub(argv.name, baseDir);
 
     await cmdFactory.generateFile(argv.name, baseDir, content);
+
 }
