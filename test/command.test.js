@@ -1,5 +1,6 @@
 const controller = require('../commands/MakeController');
 const factory = require('../src/Factory');
+const path = require('path');
 
 describe('Command', () => {
     beforeEach(async () => {
@@ -10,9 +11,9 @@ describe('Command', () => {
         await clearDirectories();
     })
 
-    it('should create file in appropriate path', async () => {
-        await runCommand('make:controller HomeController', controller).then(async res => {});
-        let isFile = await factory.pathExists('controllers/HomeController.js');
-        expect(isFile).toBe(true);
+    it.only('should create file in appropriate path', async () => {
+        let output = await runCommand('make:controller HomeController', controller);
+        let filePath = path.join(TMP_DIR, 'controllers', 'HomeController.js');
+        expect(fileExists(filePath)).toBe(true);
     });
 });

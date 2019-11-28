@@ -24,14 +24,15 @@ exports.handler = async (argv) => {
         await cmdFactory.generateFile(argv.name, baseDir, content);
         console.log(chalk.green(`Controller Created Successfully`));
     } catch (err) {
-        console.log(chalk.red(`${err}`))
+        console.log(chalk.red(`${err}`));
     }
 }
 
 exports.generateStub = async (model, category) => {
-    let stub = await cmdFactory.getStubFromFile(category);
-    if (model) {
+    if (model) {    
+        let stub = await cmdFactory.getStubFromFile(category);
         stub = stub.replace(/#{model}/g, model);
+        return stub;
     }
-    return stub;
+    return "";
 }
