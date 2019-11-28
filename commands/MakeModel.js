@@ -1,4 +1,5 @@
 const cmdFactory = require('../src/Factory');
+const chalk = require('chalk');
 
 exports.command = 'make:model [name]';
 exports.aliases = ['mm'];
@@ -9,9 +10,15 @@ const baseDir = `models`;
 
 
 exports.handler = async (argv) => {
-    //Generate the requested file
-    let content = await cmdFactory.generateStub(argv.name, baseDir);
 
-    await cmdFactory.generateFile(argv.name, baseDir, content);
+    try {
+        //Generate the requested file
+        let content = await cmdFactory.generateStub(argv.name, baseDir);
 
+        await cmdFactory.generateFile(argv.name, baseDir, content);
+
+        console.log(chalk.green("Model Created Successfully"));
+    } catch (err) {
+        console.log(chalk.red(`${err}`))
+    }
 }
