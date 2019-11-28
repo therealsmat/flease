@@ -1,4 +1,6 @@
 const factory = require('../src/Factory');
+const fs  = require('fs');
+const path = require('path');
 
 describe('Controller', () => {
     beforeEach(async () => {
@@ -10,9 +12,10 @@ describe('Controller', () => {
     })
 
     it('creates base directory if it does not exist', async () => {
+        let pt = path.join(TMP_DIR, 'models');
+        expect(dirExists(pt)).toBe(false);
         await factory.checkBaseDirectory('models');
-        exists = await factory.pathExists('models');
-        expect(exists).toBe(true);
+        expect(dirExists(pt)).toBe(true);
     });
 
     it('creates the files in the current working directory', async () => {

@@ -21,3 +21,19 @@ global.clearDirectories = async () => {
         await fs.remove(path.join(TMP_DIR, dir)).then(res => {});
     });
 }
+
+global.dirExists = (path) => {
+    try {
+        return fs.statSync(path).isDirectory();
+    } catch(err) {
+        return false;
+    }
+}
+
+global.fileExists = (path) => {
+    try {
+        return fs.statSync(path).isFile();
+    } catch(err) {
+        return false;
+    }
+}
